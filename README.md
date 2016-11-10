@@ -9,6 +9,7 @@ The website uses a ruby Generator plugin, so will not build fully on gh-pages. M
 
 bundle exec jekyll serve
 
-# push _site to gh-pages branch - ensure latest build has been committed to master branch:
+# push _site to gh-pages branch:
+ensure latest build has been committed to master branch.
 
 git subtree push --prefix _site origin gh-pages
