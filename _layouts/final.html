@@ -1,0 +1,80 @@
+---
+layout: fullwidth
+---
+<script type="text/javascript" src="{{site.baseurl}}/scripts/summary.js"></script>
+<script type="text/javascript" src="{{site.baseurl}}/scripts/jquery.collapse-help-me-decide.js"></script>
+	<h1 id="heading" tabindex="-1">MPAA summary</h1>
+	<p class="meter-description"><strong>Summary:</strong> <span id="percentCompleted">100</span>% complete</p>
+	<div class="meter">
+		<span id="percentMeter" style="width: 100%;"></span>
+	</div><!-- meter -->
+	<div id="questions"><p><strong>Based on your answers,</strong> you should consider the following conditions:</p>
+	<table class="results-table custom-controls" id="resultTable">
+		<caption class="visuallyhidden">Major projects results</caption>
+		<thead>
+			<tr>
+				<th style="width: 5%"></th>
+				<th style="width: 60%" class="registration-type">Information</th>
+				<th style="width: 30%" class="cost">pdf</th>
+				<th style="width: 5%">&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in page.contentitems %}
+			<tr id="row-{{item['id']}}" style="display: none">
+				<td valign="top" class="registration-type">
+					<p>
+						<input id="cb{{item['id']}}" type="checkbox" checked="checked">
+						<label for="cb{{item['id']}}"></label>
+					</p>
+				</td>
+				<td valign="top">{{item['summary']}}</td>
+				<td valign="top">
+				{% if item['pdf'] != "" %}
+					<p><a href="{{site.baseurl}}/pdfs/{{item['pdf']}}">{{item['pdfDescription']}}</a>.</p>
+				{% endif %}
+				</td>
+				<td valign="top" class="help">
+				{% if item['helpContent'] != "" %}
+					<p><a href="#help-anchor{{item['id']}}" class="cd-btn help"><span>help</span></a></p>
+				{% endif %}	
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<div>
+		<button type="button" id="pdf" class="btn">Generate combined pdf</button>
+	</div>
+
+	<h2>What you need to know</h2>
+	<p>Four loko hoodie whatever, kinfolk letterpress cornhole meggings bespoke. Coloring book williamsburg ramps marfa hammock, letterpress lo-fi. Chia pug flannel single-origin coffee tumeric. Schlitz selfies etsy blue bottle, williamsburg iceland fap plaid tacos irony. Before they sold out skateboard pop-up viral, meggings man braid echo park vape 3 wolf moon vinyl selfies mlkshk gluten-free.</p>
+
+</div>
+
+<div class="controls-container">
+	<div class="controls-content">
+		<button type="button" id="next" class="btn btn-default">Ok</button>
+	</div><!-- controls-content -->
+</div>
+
+ <div class="help" id="help">
+	<div class="cd-panel from-right">
+		<div class="cd-panel-header">
+			<a href="#" class="cd-panel-close">Close</a>
+			<h2 id="helpTopic">Help topics</h2>
+			<p class="cd-panel-print"><a href="#" id="aPrint" onclick="printHelp(); return false;">Print</a></p>
+		</div>
+		<div class="cd-panel-container">
+			<div class="cd-panel-content">
+				<div id="helpFile" class="showhide">
+				{% for item in page.contentitems %}
+					<input type="hidden" class="help-anchor" id="help-anchor{{item['id']}}" />
+					<h3 id="help-{{item['id']}}" style="display: none">{{item['helpTitle']}}</h3>
+					<div>{{item['helpContent']}}</div>
+				{% endfor %}
+				</div><!-- showhide -->
+			</div><!-- cd-panel-content -->
+		</div><!-- cd-panel-container -->
+	</div><!-- cd-panel -->
+  </div>
